@@ -1,0 +1,51 @@
+[[bin]]
+name = "BinaryRest"
+path = "Source/Library.rs"
+
+[[bin]]
+name = "Rest"
+path = "Source/Library.rs"
+
+[dependencies]
+clap = { features = ["derive"], version = "4.5.16" }
+walkdir = "2.5.0"
+futures = "0.3.30"
+rayon = "1.10.0"
+tokio = { version = "1.40.0", features = ["full"] }
+git2 = { version = "0.19.0" }
+num_cpus = "1.16.0"
+regex = "1.10.6"
+dashmap = "6.0.1"
+itertools = "0.13.0"
+chrono = "0.4.38"
+notify = "6.1.1"
+
+[build-dependencies]
+serde = { version = "1.0.209", features = ["derive"] }
+toml = "0.8.19"
+
+[lib]
+crate-type = ["staticlib", "cdylib", "rlib"]
+name = "Library"
+path = "Source/Library.rs"
+
+[package]
+autobenches = false
+autobins = false
+autoexamples = false
+autotests = false
+default-run = "Rest"
+description = "⛱️ Rest —"
+license = "MIT"
+name = "binaryrest"
+repository = "HTTPS://GitHub.Com/BinaryRest/Rest.git"
+version = "0.0.1"
+edition = "2021"
+include = [
+	"Source/**/*",
+	"LICENSE",
+	"README.md",
+	"CHANGELOG.md",
+	"build.rs",
+	"Cargo.toml",
+]
