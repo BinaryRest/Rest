@@ -5,7 +5,6 @@
 ///
 /// * `Option` - A reference to an `Option` struct containing the following fields:
 ///   - `Exclude`: A vector of strings representing patterns to exclude.
-///   - `Pattern`: A string pattern to match against the last element of each entry.
 ///   - `Root`: The root directory to start the walk from.
 ///   - `Separator`: The separator used for splitting file paths.
 ///
@@ -23,7 +22,6 @@
 /// ```
 /// let options = Option {
 ///     Exclude: vec!["node_modules".to_string(), "target".to_string()],
-///     Pattern: ".git".to_string(),
 ///     Root: ".".to_string(),
 ///     Separator: '/',
 /// };
@@ -32,9 +30,9 @@
 ///     println!("{:?}", path);
 /// }
 /// ```
-pub fn Fn(Option { Exclude, Pattern, Root, Separator, .. }: &Option) -> Return {
+pub fn Fn(Option { Exclude, Root, Pattern, Separator, .. }: &Option) -> Return {
 	WalkDir::new(Root)
-		.follow_links(false)
+		.follow_links(true)
 		.into_iter()
 		.filter_map(|Entry| {
 			let Path = Entry.expect("Cannot Entry.").path().display().to_string();
