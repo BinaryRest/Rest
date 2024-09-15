@@ -19,6 +19,21 @@ dashmap = "6.0.1"
 itertools = "0.13.0"
 chrono = "0.4.38"
 notify = "6.1.1"
+globset = "0.4.15"
+tracing = "0.1.40"
+tracing-subscriber = "0.3.18"
+
+swc_common = "0.38.0"
+swc_ecma_ast = "0.119.0"
+swc_ecma_codegen = "0.156.1"
+swc_ecma_parser = "0.150.0"
+swc_ecma_transforms_base = "0.147.0"
+swc_ecma_transforms_proposal = "0.181.0"
+swc_ecma_transforms_typescript = "0.200.0"
+swc_ecma_visit = "0.105.0"
+
+serde = "1.0.209"
+anyhow = "1.0.89"
 
 [build-dependencies]
 serde = { version = "1.0.209", features = ["derive"] }

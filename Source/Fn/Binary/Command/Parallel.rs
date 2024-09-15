@@ -33,10 +33,11 @@ pub async fn Fn(Option { Entry, Separator, Pattern, .. }: Option) {
 	for Entry in Entry
 		.into_par_iter()
 		.filter_map(|Entry| {
-			Entry
-				.last()
-				.filter(|Last| *Last == &Pattern)
-				.map(|_| Entry[0..Entry.len() - 1].join(&Separator.to_string()))
+			if globset::GlobSet.is_match(&Entry.join(&Separator.to_string())) {
+				Some(Entry[0..Entry.len() - 1].join(&Separator.to_string()))
+			} else {
+				None
+			}
 		})
 		.collect::<Vec<String>>()
 	{

@@ -1,4 +1,4 @@
-/// Creates and returns the command-line argument matches for the `Build` application.
+/// Creates and returns the command-line argument matches for the `Rest` application.
 ///
 /// This function sets up the command-line interface using the `clap` crate, defining various
 /// arguments and their properties such as short and long names, help messages, default values,
@@ -29,10 +29,10 @@
 ///
 /// This function will panic if there are issues with the argument definitions or parsing.
 pub fn Fn() -> ArgMatches {
-	Command::new("Build")
+	Command::new("Rest")
 		.version(env!("CARGO_PKG_VERSION"))
 		.author("🖋️ Source — 👐🏻 Open — <Source/Open@PlayForm.Cloud>")
-		.about("⛱️ Build —")
+		.about("⛱️ Rest —")
 		.arg(
 			Arg::new("Exclude")
 				.short('E')
