@@ -24,9 +24,6 @@ Options:
   -V, --version            Print version
 ```
 
-This command will generate summaries for all the `Git` tags inside the specified
-repository.
-
 ## Options
 
 The [Rest] tool can be used with various options:
@@ -70,9 +67,6 @@ Default is:
 ```sh
 Rest -P --Root .
 ```
-
-For [Pieces OS] integration, refer to the [Pieces OS] documentation for specific
-flags and configuration options. [Pieces OS]
 
 ## Examples
 

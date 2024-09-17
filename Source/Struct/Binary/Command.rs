@@ -35,19 +35,6 @@ impl Struct {
 							Sequential::Fn(Option).await;
 						}
 					};
-
-					// apis::well_known_api::get_well_known_health(
-					// 	&apis::configuration::Configuration {
-					// 		base_path: "http://localhost:1000".to_string(),
-					// 		user_agent: Option {},
-					// 		client: reqwest::Client,
-					// 		basic_auth: Option {},
-					// 		oauth_access_token: Option {},
-					// 		bearer_access_token: Option {},
-					// 		api_key: Option {},
-					// 	},
-					// )
-					// .await;
 				})
 			}),
 		}

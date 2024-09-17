@@ -1,21 +1,21 @@
+pub mod Compile;
 
-#[instrument]
-pub async fn Fn(path: PathBuf, options: CompilerOptions) -> Result<()> {
+#[tracing::instrument]
+pub async fn Fn(Path: PathBuf, Option: Option) -> notify::Result<()> {
 	let (tx, mut rx) = mpsc::unbounded_channel();
 
-	let mut watcher = RecommendedWatcher::new(
-		move |res| {
+	notify::recommended_watcher::new(
+		move |Result| {
 			let _ = futures::executor::block_on(async {
-				tx.send(res).unwrap();
+				tx.send(Result).unwrap();
 			});
 		},
-		Config::default(),
-	)?;
+		notify::Config::default(),
+	)?
+	.watch(Path.as_ref(), notify::RecursiveMode::Recursive)?;
 
-	watcher.watch(path.as_ref(), RecursiveMode::Recursive)?;
-
-	while let Some(res) = rx.recv().await {
-		match res {
+	while let Some(Result) = rx.recv().await {
+		match Result {
 			Ok(event) => {
 				if let notify::Event {
 					kind: notify::EventKind::Modify(notify::event::ModifyKind::Data(_)),
@@ -25,12 +25,13 @@ pub async fn Fn(path: PathBuf, options: CompilerOptions) -> Result<()> {
 				{
 					for path in paths {
 						if path.extension().map_or(false, |ext| ext == "ts") {
-							let file_options = CompilerOptions {
-								entry: vec![vec![path.to_string_lossy().to_string()]],
-								..options.clone()
-							};
-							task::spawn(async move {
-								if let Err(e) = Compile::Fn(file_options).await {
+							tokio::task::spawn(async move {
+								if let Err(e) = Compile::Fn(Option {
+									entry: vec![vec![path.to_string_lossy().to_string()]],
+									..Option.clone()
+								})
+								.await
+								{
 									error!("Compilation error: {}", e);
 								}
 							});
@@ -38,6 +39,7 @@ pub async fn Fn(path: PathBuf, options: CompilerOptions) -> Result<()> {
 					}
 				}
 			}
+
 			Err(e) => error!("Watch error: {:?}", e),
 		}
 	}
@@ -45,4 +47,7 @@ pub async fn Fn(path: PathBuf, options: CompilerOptions) -> Result<()> {
 	Ok(())
 }
 
-pub mod Compile;
+use notify::RecommendedWatcher;
+use tracing::error;
+
+use super::Option;

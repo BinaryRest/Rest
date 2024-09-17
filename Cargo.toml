@@ -23,17 +23,18 @@ globset = "0.4.15"
 tracing = "0.1.40"
 tracing-subscriber = "0.3.18"
 
-swc_common = "0.38.0"
-swc_ecma_ast = "0.119.0"
-swc_ecma_codegen = "0.156.1"
-swc_ecma_parser = "0.150.0"
-swc_ecma_transforms_base = "0.147.0"
-swc_ecma_transforms_proposal = "0.181.0"
-swc_ecma_transforms_typescript = "0.200.0"
-swc_ecma_visit = "0.105.0"
+swc_common = { version = "0.38.0", path = "../../../Dependency/SWC/Dependency/SWC/crates/swc_common" }
+swc_ecma_ast = { version = "0.119.0", path = "../../../Dependency/SWC/Dependency/SWC/crates/swc_ecma_ast" }
+swc_ecma_codegen = { version = "0.156.1", path = "../../../Dependency/SWC/Dependency/SWC/crates/swc_ecma_codegen" }
+swc_ecma_parser = { version = "0.150.0", path = "../../../Dependency/SWC/Dependency/SWC/crates/swc_ecma_parser" }
+swc_ecma_transforms_base = { version = "0.147.0", path = "../../../Dependency/SWC/Dependency/SWC/crates/swc_ecma_transforms_base" }
+swc_ecma_transforms_proposal = { version = "0.181.0", path = "../../../Dependency/SWC/Dependency/SWC/crates/swc_ecma_transforms_proposal" }
+swc_ecma_transforms_typescript = { version = "0.200.0", path = "../../../Dependency/SWC/Dependency/SWC/crates/swc_ecma_transforms_typescript" }
+swc_ecma_visit = { version = "0.105.0", path = "../../../Dependency/SWC/Dependency/SWC/crates/swc_ecma_visit" }
 
 serde = "1.0.209"
 anyhow = "1.0.89"
+serde_json = "1.0.128"
 
 [build-dependencies]
 serde = { version = "1.0.209", features = ["derive"] }
@@ -52,7 +53,7 @@ autotests = false
 default-run = "Rest"
 description = "⛱️ Rest —"
 license = "MIT"
-name = "binaryrest"
+name = "Rest"
 repository = "https://github.com/BinaryRest/Rest.git"
 version = "0.0.1"
 edition = "2021"
