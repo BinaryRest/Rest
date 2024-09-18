@@ -42,7 +42,6 @@ use std::{
 	time::{Duration, Instant, SystemTime},
 };
 
-use anyhow::Context;
 use futures::stream::FuturesUnordered;
 use notify::{Config, RecommendedWatcher, RecursiveMode};
 use serde::{Deserialize, Serialize};
@@ -62,6 +61,5 @@ use swc_ecma_transforms_base::{
 	resolver,
 };
 use swc_ecma_transforms_proposal::decorators;
-use swc_ecma_transforms_typescript::strip;
 
 use crate::Struct::SWC;

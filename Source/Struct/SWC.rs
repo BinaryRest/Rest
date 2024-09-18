@@ -45,17 +45,17 @@ pub struct Compiler {
 }
 
 impl Compiler {
-	fn new(config: CompilerConfig) -> Self {
+	pub fn new(config: CompilerConfig) -> Self {
 		Self { config, Outlook: Arc::new(Mutex::new(CompilerMetrics::default())) }
 	}
 
 	#[tracing::instrument(skip(self, input))]
-	async fn compile_file(&self, file: &str, input: String) -> Result<String> {
+	async fn compile_file(&self, File: &str, input: String) -> Result<String> {
 		let Begin = Instant::now();
 
 		let cm = SourceMap::new(FilePathMapping::empty());
 
-		let source_file = cm.new_source_file(FileName::Real(file.into()), input);
+		let source_file = cm.new_source_file(FileName::Real(File.into()), input);
 
 		let mut parser = Parser::new_from(Lexer::new(
 			Syntax::Typescript(TsConfig { decorators: true, ..Default::default() }),
@@ -64,18 +64,20 @@ impl Compiler {
 			None,
 		));
 
-		let mut File = parser.parse_module().expect("Failed to parse TypeScript module")?;
+		let mut Parsed = parser.parse_module().expect("Failed to parse TypeScript module")?;
 
-		File =
-			File.fold_with(&mut swc_ecma_transforms_base::resolver(Mark::new(), Mark::new(), true));
-		File = File.fold_with(&mut swc_ecma_transforms_typescript::strip());
-		File = File.fold_with(&mut decorators::decorators(decorators::Config {
+		let Unresolved = Mark::new();
+		let Top = Mark::new();
+
+		Parsed = Parsed.fold_with(&mut swc_ecma_transforms_base::resolver(Unresolved, Top, true));
+		Parsed = Parsed.fold_with(&mut swc_ecma_transforms_typescript::strip(Unresolved, Top));
+		Parsed = Parsed.fold_with(&mut decorators::decorators(decorators::Config {
 			legacy: false,
 			emit_metadata: self.config.emit_decorators_metadata,
 			use_define_for_class_fields: true,
 			..Default::default()
 		}));
-		File = File.fold_with(&mut InjectHelpers::default());
+		Parsed = Parsed.fold_with(&mut InjectHelpers::default());
 
 		let mut Output = vec![];
 
@@ -86,11 +88,11 @@ impl Compiler {
 			wr: JsWriter::new(cm.into(), "\n", &mut Output, None),
 		};
 
-		Emitter.emit_module(&File).context("Failed to emit JavaScript")?;
+		Emitter.emit_module(&Parsed).expect("Failed to emit JavaScript")?;
 
-		let js_path = Path::new(file).with_extension("js");
+		let js_path = Path::new(File).with_extension("js");
 
-		fs::write(&js_path, &Output).await.context("Failed to write output file")?;
+		tokio::fs::write(&js_path, &Output).await.expect("Failed to write output file")?;
 
 		let Elapsed = Begin.elapsed();
 
@@ -98,12 +100,11 @@ impl Compiler {
 		Outlook.Count += 1;
 		Outlook.Elapsed += Elapsed;
 
-		debug!("Compiled {} in {:?}", file, Elapsed);
+		debug!("Compiled {} in {:?}", File, Elapsed);
 
 		Ok(js_path.to_string_lossy().to_string())
 	}
 }
 
 use serde::{Deserialize, Serialize};
-use swc_common::DUMMY_SP;
 use tracing::debug;

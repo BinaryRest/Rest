@@ -3,7 +3,7 @@ pub async fn Fn(Option: super::Option) -> Result<()> {
 	let (tx, mut rx) = mpsc::unbounded_channel();
 	let Queue = FuturesUnordered::new();
 
-	let Compiler = Arc::new(Compiler::new(Option.config.clone()));
+	let Compiler = Arc::new(crate::Struct::SWC::Compiler::new(Option.config.clone()));
 
 	for file in Option
 		.entry
@@ -76,5 +76,4 @@ pub async fn Fn(Option: super::Option) -> Result<()> {
 	Ok(())
 }
 
-use rayon::prelude::{IntoParallelIterator, ParallelIterator};
 use tracing::{error, info, warn};
