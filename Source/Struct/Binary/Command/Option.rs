@@ -61,4 +61,3 @@ pub type Pattern = String;
 
 /// Type alias for a character used as a separator for file paths.
 pub type Separator = char;
-
