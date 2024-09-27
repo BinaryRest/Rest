@@ -9,8 +9,8 @@ async fn Fn() -> anyhow::Result<()> {
 
 	let Path = std::path::PathBuf::from(&args[1]);
 
-	let config = if let Ok(config_file) = fs::read_to_string("swc_config.json").await {
-		serde_json::from_str(&config_file).unwrap_or_default()
+	let Config = if let Ok(Config) = fs::read_to_string("swc_config.json").await {
+		serde_json::from_str(&Config).unwrap_or_default()
 	} else {
 		CompilerConfig::default()
 	};
@@ -19,7 +19,7 @@ async fn Fn() -> anyhow::Result<()> {
 		entry: vec![vec![Path.to_string_lossy().to_string()]],
 		separator: std::path::MAIN_SEPARATOR,
 		pattern: ".ts".to_string(),
-		config: config.clone(),
+		config: Config.clone(),
 	};
 
 	// Initial compilation

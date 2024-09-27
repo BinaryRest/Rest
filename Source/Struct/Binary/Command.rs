@@ -48,4 +48,3 @@ pub mod Entry;
 pub mod Option;
 
 use crate::Fn::Binary::Command::{Parallel, Sequential};
-// use pieces_os_client::*;

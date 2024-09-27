@@ -14,10 +14,10 @@ pub struct CompilerConfig {
 
 #[derive(Debug, Clone)]
 pub struct Option {
-	entry: Vec<Vec<String>>,
-	separator: char,
-	pattern: String,
-	config: CompilerConfig,
+	pub entry: Vec<Vec<String>>,
+	pub separator: char,
+	pub pattern: String,
+	pub config: CompilerConfig,
 }
 
 #[derive(Debug, Default)]
@@ -67,6 +67,7 @@ impl Compiler {
 		let mut Parsed = parser.parse_module().expect("Failed to parse TypeScript module")?;
 
 		let Unresolved = Mark::new();
+
 		let Top = Mark::new();
 
 		Parsed = Parsed.fold_with(&mut swc_ecma_transforms_base::resolver(Unresolved, Top, true));
