@@ -8,8 +8,8 @@ pub struct FileInfo {
 pub struct CompilerConfig {
 	Target: String,
 	Module: String,
-	strict: bool,
-	emit_decorators_metadata: bool,
+	Strict: bool,
+	EmitDecoratorsMetadata: bool,
 }
 
 #[derive(Debug, Clone)]
@@ -32,8 +32,8 @@ impl Default for CompilerConfig {
 		Self {
 			Target: "es2022".to_string(),
 			Module: "commonjs".to_string(),
-			strict: true,
-			emit_decorators_metadata: true,
+			Strict: true,
+			EmitDecoratorsMetadata: true,
 		}
 	}
 }
@@ -70,14 +70,17 @@ impl Compiler {
 		let Top = Mark::new();
 
 		Parsed = Parsed.fold_with(&mut swc_ecma_transforms_base::resolver(Unresolved, Top, true));
+		
 		Parsed = Parsed.fold_with(&mut swc_ecma_transforms_typescript::strip(Unresolved, Top));
+
 		Parsed = Parsed.fold_with(&mut decorators::decorators(decorators::Config {
 			legacy: false,
-			emit_metadata: self.config.emit_decorators_metadata,
+			emit_metadata: self.config.EmitDecoratorsMetadata,
 			use_define_for_class_fields: true,
 			..Default::default()
 		}));
-		Parsed = Parsed.fold_with(&mut InjectHelpers::default());
+
+		// Parsed = Parsed.fold_with(&mut InjectHelpers::default());
 
 		let mut Output = vec![];
 
@@ -90,9 +93,9 @@ impl Compiler {
 
 		Emitter.emit_module(&Parsed).expect("Failed to emit JavaScript")?;
 
-		let js_path = Path::new(File).with_extension("js");
+		let Path = Path::new(File).with_extension("js");
 
-		tokio::fs::write(&js_path, &Output).await.expect("Failed to write output file")?;
+		tokio::fs::write(&Path, &Output).await.expect("Failed to write output file")?;
 
 		let Elapsed = Begin.elapsed();
 
@@ -102,7 +105,7 @@ impl Compiler {
 
 		debug!("Compiled {} in {:?}", File, Elapsed);
 
-		Ok(js_path.to_string_lossy().to_string())
+		Ok(Path.to_string_lossy().to_string())
 	}
 }
 
