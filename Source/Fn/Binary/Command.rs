@@ -1,19 +1,24 @@
-/// Creates and returns the command-line argument matches for the `Rest` application.
+/// Creates and returns the command-line argument matches for the `Rest`
+/// application.
 ///
-/// This function sets up the command-line interface using the `clap` crate, defining various
-/// arguments and their properties such as short and long names, help messages, default values,
-/// and whether they are required.
+/// This function sets up the command-line interface using the `clap` crate,
+/// defining various arguments and their properties such as short and long
+/// names, help messages, default values, and whether they are required.
 ///
 /// # Returns
 ///
-/// Returns an `ArgMatches` instance containing the parsed command-line arguments.
+/// Returns an `ArgMatches` instance containing the parsed command-line
+/// arguments.
 ///
 /// # Arguments
 ///
-/// * `Exclude` - An optional argument to specify patterns to exclude. Default is "node_modules".
+/// * `Exclude` - An optional argument to specify patterns to exclude. Default
+///   is "node_modules".
 /// * `Parallel` - An optional flag to enable parallel processing.
-/// * `Pattern` - An optional argument to specify a pattern to match. Default is ".git".
-/// * `Root` - An optional argument to specify the root directory. Default is ".".
+/// * `Pattern` - An optional argument to specify a pattern to match. Default is
+///   ".git".
+/// * `Root` - An optional argument to specify the root directory. Default is
+///   ".".
 ///
 /// # Example
 ///
@@ -27,7 +32,8 @@
 ///
 /// # Errors
 ///
-/// This function will panic if there are issues with the argument definitions or parsing.
+/// This function will panic if there are issues with the argument definitions
+/// or parsing.
 pub fn Fn() -> ArgMatches {
 	Command::new("Rest")
 		.version(env!("CARGO_PKG_VERSION"))
