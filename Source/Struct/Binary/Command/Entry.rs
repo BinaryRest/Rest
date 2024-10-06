@@ -43,12 +43,7 @@ impl Struct {
 	}
 }
 
-use crate::Struct::Binary::Command::Option::{
-	Parallel,
-	Pattern,
-	Separator,
-	Struct as Option,
-};
+use crate::Struct::Binary::Command::Option::{Parallel, Pattern, Separator, Struct as Option};
 
 /// Type alias for a vector of vectors, where each inner vector contains the
 /// components of a file path.

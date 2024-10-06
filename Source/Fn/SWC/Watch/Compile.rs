@@ -3,19 +3,16 @@ pub async fn Fn(Option:super::Option) -> Result<()> {
 	let (Allow, mut Mark) = mpsc::unbounded_channel();
 	let Queue = FuturesUnordered::new();
 
-	let Compiler =
-		Arc::new(crate::Struct::SWC::Compiler::new(Option.config.clone()));
+	let Compiler = Arc::new(crate::Struct::SWC::Compiler::new(Option.config.clone()));
 
 	for file in Option
 		.entry
 		.into_par_iter()
 		.filter_map(|entry| {
-			entry.last().filter(|last| last.ends_with(&Option.pattern)).map(
-				|_| {
-					entry[0..entry.len() - 1]
-						.join(&Option.separator.to_string())
-				},
-			)
+			entry
+				.last()
+				.filter(|last| last.ends_with(&Option.pattern))
+				.map(|_| entry[0..entry.len() - 1].join(&Option.separator.to_string()))
 		})
 		.collect()
 	{
@@ -28,9 +25,7 @@ pub async fn Fn(Option:super::Option) -> Result<()> {
 				Ok(input) => {
 					match Compiler.compile_file(&file, input).await {
 						Ok(output) => {
-							if let Err(e) =
-								Allow.send((file.clone(), Ok(output)))
-							{
+							if let Err(e) = Allow.send((file.clone(), Ok(output))) {
 								error!("Cannot send compilation result: {}", e);
 							}
 						},
@@ -76,8 +71,7 @@ pub async fn Fn(Option:super::Option) -> Result<()> {
 	let Outlook = Compiler.metrics.lock().await;
 
 	info!(
-		"Compilation complete. Processed {} files in {:?}. {} successful, {} \
-		 failed.",
+		"Compilation complete. Processed {} files in {:?}. {} successful, {} failed.",
 		Outlook.files_processed, Outlook.total_time, Count, Error
 	);
 

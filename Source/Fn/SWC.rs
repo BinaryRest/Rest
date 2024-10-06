@@ -9,8 +9,7 @@ async fn Fn() -> anyhow::Result<()> {
 
 	let Path = std::path::PathBuf::from(&args[1]);
 
-	let Config = if let Ok(Config) = fs::read_to_string("swc_config.json").await
-	{
+	let Config = if let Ok(Config) = fs::read_to_string("swc_config.json").await {
 		serde_json::from_str(&Config).unwrap_or_default()
 	} else {
 		CompilerConfig::default()

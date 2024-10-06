@@ -44,23 +44,14 @@ impl Struct {
 				.map(|Exclude| Exclude.to_string())
 				.collect::<Vec<_>>(),
 			Parallel:Command().get_flag("Parallel"),
-			Pattern:Command()
-				.get_one::<String>("Pattern")
-				.expect("Cannot Pattern.")
-				.to_owned(),
-			Root:Command()
-				.get_one::<String>("Root")
-				.expect("Cannot Root.")
-				.to_owned(),
+			Pattern:Command().get_one::<String>("Pattern").expect("Cannot Pattern.").to_owned(),
+			Root:Command().get_one::<String>("Root").expect("Cannot Root.").to_owned(),
 			Separator,
 		}
 	}
 }
 
-use crate::{
-	Fn::Binary::Command::Fn as Command,
-	Struct::Binary::Command::Struct as Option,
-};
+use crate::{Fn::Binary::Command::Fn as Command, Struct::Binary::Command::Struct as Option};
 
 /// Type alias for a vector of strings representing command options.
 pub type Command = Vec<String>;

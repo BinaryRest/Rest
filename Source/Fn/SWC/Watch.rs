@@ -18,10 +18,7 @@ pub async fn Fn(Path:PathBuf, Option:Option) -> notify::Result<()> {
 		match Result {
 			Ok(event) => {
 				if let notify::Event {
-					kind:
-						notify::EventKind::Modify(notify::event::ModifyKind::Data(
-							_,
-						)),
+					kind: notify::EventKind::Modify(notify::event::ModifyKind::Data(_)),
 					paths,
 					..
 				} = event
@@ -30,9 +27,7 @@ pub async fn Fn(Path:PathBuf, Option:Option) -> notify::Result<()> {
 						if path.extension().map_or(false, |ext| ext == "ts") {
 							tokio::task::spawn(async move {
 								if let Err(e) = Compile::Fn(Option {
-									entry:vec![vec![
-										path.to_string_lossy().to_string(),
-									]],
+									entry:vec![vec![path.to_string_lossy().to_string()]],
 									..Option.clone()
 								})
 								.await

@@ -46,10 +46,7 @@ pub struct Compiler {
 
 impl Compiler {
 	pub fn new(config:CompilerConfig) -> Self {
-		Self {
-			config,
-			Outlook:Arc::new(Mutex::new(CompilerMetrics::default())),
-		}
+		Self { config, Outlook:Arc::new(Mutex::new(CompilerMetrics::default())) }
 	}
 
 	#[tracing::instrument(skip(self, input))]
@@ -58,42 +55,31 @@ impl Compiler {
 
 		let cm = SourceMap::new(FilePathMapping::empty());
 
-		let source_file =
-			cm.new_source_file(FileName::Real(File.into()), input);
+		let source_file = cm.new_source_file(FileName::Real(File.into()), input);
 
 		let mut parser = Parser::new_from(Lexer::new(
-			Syntax::Typescript(TsConfig {
-				decorators:true,
-				..Default::default()
-			}),
+			Syntax::Typescript(TsConfig { decorators:true, ..Default::default() }),
 			EsVersion::Es2022,
 			StringInput::from(&*source_file),
 			None,
 		));
 
-		let mut Parsed = parser
-			.parse_module()
-			.expect("Failed to parse TypeScript module")?;
+		let mut Parsed = parser.parse_module().expect("Failed to parse TypeScript module")?;
 
 		let Unresolved = Mark::new();
 
 		let Top = Mark::new();
 
-		Parsed = Parsed.fold_with(&mut swc_ecma_transforms_base::resolver(
-			Unresolved, Top, true,
-		));
+		Parsed = Parsed.fold_with(&mut swc_ecma_transforms_base::resolver(Unresolved, Top, true));
 
-		Parsed = Parsed.fold_with(&mut swc_ecma_transforms_typescript::strip(
-			Unresolved, Top,
-		));
+		Parsed = Parsed.fold_with(&mut swc_ecma_transforms_typescript::strip(Unresolved, Top));
 
-		Parsed =
-			Parsed.fold_with(&mut decorators::decorators(decorators::Config {
-				legacy:false,
-				emit_metadata:self.config.EmitDecoratorsMetadata,
-				use_define_for_class_fields:true,
-				..Default::default()
-			}));
+		Parsed = Parsed.fold_with(&mut decorators::decorators(decorators::Config {
+			legacy:false,
+			emit_metadata:self.config.EmitDecoratorsMetadata,
+			use_define_for_class_fields:true,
+			..Default::default()
+		}));
 
 		// Parsed = Parsed.fold_with(&mut InjectHelpers::default());
 
@@ -110,9 +96,7 @@ impl Compiler {
 
 		let Path = Path::new(File).with_extension("js");
 
-		tokio::fs::write(&Path, &Output)
-			.await
-			.expect("Failed to write output file")?;
+		tokio::fs::write(&Path, &Output).await.expect("Failed to write output file")?;
 
 		let Elapsed = Begin.elapsed();
 
