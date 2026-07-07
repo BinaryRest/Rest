@@ -9,15 +9,13 @@
 				</picture>
 			</h3>
 		</td>
-		<td colspan="3" valign="top">
-			<h3 align="center"> Rest ☕</h3>
-		</td>
+		<td colspan="3" valign="top"><h3 align="center">Rest&#x2001;☕</h3></td>
 	</tr>
 </table>
 
 ---
 
-# **Rest** ☕ Architecture
+# **Rest**&#x2001;☕&#x2001;Architecture
 
 `Rest` is a high-performance `TypeScript` compiler built on the OXC (Oxidation
 Compiler) toolchain:
@@ -65,7 +63,7 @@ graph TB
     BUNDLE --> MAP["Source maps<br/>(.js.map)"]
 ```
 
-## Overview 📋
+## Overview&#x2001;📋
 
 `Rest` is a `Rust` binary and library that provides a
 `TypeScript`-to-`JavaScript` compiler using the OXC toolchain:
@@ -85,7 +83,7 @@ graph TB
 
 ---
 
-## Architecture 🏗️
+## Architecture&#x2001;🏗️
 
 ```
 +---------------------------------------------------------+
@@ -109,7 +107,7 @@ graph TB
 +---------------------------------------------------------+
 ```
 
-### Module Map 🗺️
+### Module Map&#x2001;🗺️
 
 | Path                              | Purpose                              |
 | --------------------------------- | ------------------------------------ |
@@ -126,7 +124,7 @@ graph TB
 
 ---
 
-## Compilation Pipeline 🔧
+## Compilation Pipeline&#x2001;🔧
 
 The OXC compilation pipeline processes `TypeScript` input through multiple
 stages:
@@ -164,7 +162,7 @@ TypeScript input (.ts, .tsx, .mts, .cts)
 JavaScript output (.js, .cjs, .mjs)
 ```
 
-### Parallel Processing ⚡
+### Parallel Processing&#x2001;⚡
 
 `Rest` uses `rayon` for parallel file compilation:
 
@@ -180,7 +178,7 @@ the `--workers N` flag.
 
 ---
 
-## Configuration ⚙️
+## Configuration&#x2001;⚙️
 
 `Rest` reads configuration from CLI flags and environment variables:
 
@@ -195,7 +193,7 @@ the `--workers N` flag.
 | `--decorators`   | `REST_DECORATORS`   | `legacy`   | Decorator metadata mode       |
 | `--class-fields` | `REST_CLASS_FIELDS` | `define`   | Class field emit mode         |
 
-### Output Configuration 📝
+### Output Configuration&#x2001;📝
 
 ```sh
 rest --entry src/index.ts \
@@ -207,7 +205,7 @@ rest --entry src/index.ts \
 
 ---
 
-## CLI Usage 💻
+## CLI Usage&#x2001;💻
 
 ```sh
 # Single file compilation
@@ -228,7 +226,7 @@ rest --entry src/index.ts --out-dir dist/ --decorators stage3
 
 ---
 
-## Integration with Output 🔗
+## Integration with Output&#x2001;🔗
 
 `Rest` integrates with the `Output` element's build pipeline through the
 `RestPlugin`:
@@ -260,7 +258,7 @@ Activated via environment variable: `Compiler=Rest`
 
 ---
 
-## Performance Benchmarks 📊
+## Performance Benchmarks&#x2001;📊
 
 | Operation                    | esbuild | Rest (OXC) | Improvement |
 | ---------------------------- | ------- | ---------- | ----------- |
@@ -273,7 +271,7 @@ Benchmarks performed on Apple M1 Max with 8 worker threads.
 
 ---
 
-## Related Documentation 📚
+## Related Documentation&#x2001;📚
 
 - [Output](https://github.com/CodeEditorLand/Output/tree/Current/Documentation/GitHub/Architecture.md) -
   Build artifact management (`RestPlugin` consumer)
