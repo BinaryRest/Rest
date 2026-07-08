@@ -51,8 +51,8 @@ _"One compilation pipeline, `OXC` at native speed, zero Node.js processes in the
 hot path."_
 
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](https://github.com/CodeEditorLand/Rest/blob/Current/LICENSE)
-[<img src="https://editor.land/Image/Rust.svg" width="14" alt="Rust" />](https://www.rust-lang.org/)&#x2001;[![Rust Version](https://img.shields.io/badge/Rust-1.95+-orange.svg)](https://www.rust-lang.org/)
-[<img src="https://editor.land/Image/Rust.svg" width="14" alt="Rust" />](https://www.rust-lang.org/)&#x2001;Edition
+[<img src="https://editor.land/Image/Rust.svg" width="14" alt="Rust" />](https://www.rust-lang.org/) [![Rust Version](https://img.shields.io/badge/Rust-1.95+-orange.svg)](https://www.rust-lang.org/)
+[<img src="https://editor.land/Image/Rust.svg" width="14" alt="Rust" />](https://www.rust-lang.org/) Edition
 2024
 
 **[Rust API Documentation](https://rust.documentation.rest.editor.land/)**&#x2001;📖
@@ -147,7 +147,7 @@ incremental recompilation on file changes.
 
 ---
 
-## System Architecture&#x2001;
+## System Architecture
 
 ```mermaid
 graph LR
@@ -322,7 +322,7 @@ Rest is the compilation step for the broader Land toolchain:
 | **Output**&#x2001;⚫            | Bundled JS output | Destination directory for the bundles Rest produces                 |
 | **Cocoon**&#x2001;🦋            | Extension host    | Loads (`require()`s) the bundles Rest produced, via `Output`        |
 
-Rest depends on `Common`&#x2001;🧩&#x2001;for shared type definitions and
+Rest depends on `Common`&#x2001;🧩 for shared type definitions and
 utility functions used across the Land Rust infrastructure.
 
 ---
