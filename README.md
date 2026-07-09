@@ -322,7 +322,7 @@ Rest is the compilation step for the broader Land toolchain:
 | **Output**&#x2001;⚫            | Bundled JS output | Destination directory for the bundles Rest produces                 |
 | **Cocoon**&#x2001;🦋            | Extension host    | Loads (`require()`s) the bundles Rest produced, via `Output`        |
 
-Rest depends on `Common`&#x2001;🧩 for shared type definitions and
+Rest depends on `Common`&#x2001;🧑🏻‍🏭 for shared type definitions and
 utility functions used across the Land Rust infrastructure.
 
 ---
@@ -406,13 +406,13 @@ Rest is designed to be compatible with:
   architecture
 - [Why Rust](https://Editor.Land/Doc/why-rust) - Why `Rust` for Land
   infrastructure
-- [Maintain](https://github.com/CodeEditorLand/Maintain)&#x2001;🔧 - Build
+- [Maintain](https://github.com/CodeEditorLand/Maintain)&#x2001;💪🏻 - Build
   system and development runner
 - [Cocoon](https://github.com/CodeEditorLand/Cocoon)&#x2001;🦋 -
   `Node.js`/`Effect-TS` extension host
 - [Output](https://github.com/CodeEditorLand/Output)&#x2001;⚫ - Bundled JS
   output consumed by `Cocoon`
-- [Common](https://github.com/CodeEditorLand/Common)&#x2001;🧩 - Shared abstract
+- [Common](https://github.com/CodeEditorLand/Common)&#x2001;🧑🏻‍🏭 - Shared abstract
   foundation
 - [Land Documentation Index](https://Editor.Land/Doc) - Full documentation index
 

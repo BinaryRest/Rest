@@ -9,13 +9,13 @@
 				</picture>
 			</h3>
 		</td>
-		<td colspan="3" valign="top"><h3 align="center">Rest&#x2001;☕</h3></td>
+		<td colspan="3" valign="top"><h3 align="center">Rest&#x2001;⛱️</h3></td>
 	</tr>
 </table>
 
 ---
 
-# **Rest**&#x2001;☕&#x2001;Architecture
+# **Rest**&#x2001;⛱️&#x2001;Architecture
 
 `Rest` is a high-performance `TypeScript` compiler built on the OXC (Oxidation
 Compiler) toolchain:
